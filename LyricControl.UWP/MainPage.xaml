@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="LyricControl.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LyricControl.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel Spacing="12">
+                <TextBox Text="{x:Bind Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  AcceptsReturn="True" Header="歌词"/>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <muxc:NumberBox Text="{x:Bind TotalTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="128" HorizontalAlignment="Left" Header="总时间"/>
+                    <muxc:NumberBox Text="{x:Bind NormalizedTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="128" HorizontalAlignment="Left" Header="当前播放时间"/>
+                    <Button x:Name="PlayBtn" Content="播放" VerticalAlignment="Bottom" Click="PlayBtn_OnClick"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <ScrollViewer  Grid.Row="1" >
+            <canvas:CanvasAnimatedControl x:Name="CanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </ScrollViewer>
+    </Grid>
+</Page>
