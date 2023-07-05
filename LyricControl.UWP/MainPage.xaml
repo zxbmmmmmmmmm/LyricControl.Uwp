@@ -6,8 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:controls="using:LyricControl.UWP.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
+    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
 
     <Grid Margin="24">
         <Grid.RowDefinitions>
@@ -16,16 +17,20 @@
         </Grid.RowDefinitions>
         <Grid>
             <StackPanel Spacing="12">
-                <TextBox Text="{x:Bind Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  AcceptsReturn="True" Header="歌词"/>
+                <TextBox Text="{x:Bind LyricControl.Lyric.Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  AcceptsReturn="True" Header="歌词"/>
                 <StackPanel Orientation="Horizontal" Spacing="12">
-                    <muxc:NumberBox Text="{x:Bind TotalTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="128" HorizontalAlignment="Left" Header="总时间"/>
-                    <muxc:NumberBox Text="{x:Bind NormalizedTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="128" HorizontalAlignment="Left" Header="当前播放时间"/>
-                    <Button x:Name="PlayBtn" Content="播放" VerticalAlignment="Bottom" Click="PlayBtn_OnClick"/>
+                    <muxc:NumberBox x:Name="DurationBox" ValueChanged="DurationBox_ValueChanged" Width="128" HorizontalAlignment="Left" Header="总时间"/>
+                    <muxc:NumberBox x:Name="CurrentTimeBox"  ValueChanged="CurrentTimeBox_ValueChanged" Width="128" HorizontalAlignment="Left" Header="当前播放时间"/>
+                    <muxc:NumberBox Text="{x:Bind CurrentCharacter,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="128" HorizontalAlignment="Left" Header="播放字符"/>
+                    <Button x:Name="PlayButton" Click="PlayButton_Click" Content="播放" VerticalAlignment="Bottom"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
         <ScrollViewer  Grid.Row="1" >
-            <canvas:CanvasAnimatedControl x:Name="CanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Grid>
+                <controls:LyricControl x:Name="LyricControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontStyle="Italic"/>
+                <canvas:CanvasAnimatedControl x:Name="CanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </Page>
