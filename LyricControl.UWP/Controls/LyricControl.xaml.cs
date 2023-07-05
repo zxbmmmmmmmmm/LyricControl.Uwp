@@ -88,9 +88,8 @@ namespace LyricControl.UWP.Controls
                     },
                     ColorMatrix = GetColorMatrix(_shadowColor)
                 };
-
-                args.DrawingSession.DrawImage(accentLyric);
                 args.DrawingSession.DrawImage(shadow);
+                args.DrawingSession.DrawImage(accentLyric);
             }
         }
 
@@ -103,15 +102,15 @@ namespace LyricControl.UWP.Controls
             var B = ((float)color.B - 128) / 128;
 
             matrix.M11 = R;
-            matrix.M21 = G;
-            matrix.M31 = B;
+            matrix.M12 = G;
+            matrix.M13 = B;
 
-            matrix.M12 = R;
+            matrix.M21 = R;
             matrix.M22 = G;
-            matrix.M32 = B;
+            matrix.M23 = B;
 
-            matrix.M13 = R;
-            matrix.M23 = G;
+            matrix.M31 = R;
+            matrix.M32 = G;
             matrix.M33 = B;
 
             matrix.M44 = 1;

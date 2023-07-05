@@ -28,7 +28,7 @@
         </Grid>
         <ScrollViewer  Grid.Row="1" >
             <Grid>
-                <controls:LyricControl x:Name="LyricControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontStyle="Italic" TextFontFamily="Impact"/>
+                <controls:LyricControl x:Name="LyricControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextFontFamily="Gadugi" AccentLyricColor="#CCFFFFFF"/>
                 <canvas:CanvasAnimatedControl x:Name="CanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             </Grid>
         </ScrollViewer>
