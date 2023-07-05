@@ -53,14 +53,16 @@ namespace LyricControl.UWP.Controls
             using (var textFormat = new CanvasTextFormat
             {
                 FontSize = _fontSize,
-                HorizontalAlignment = CanvasHorizontalAlignment.Center,
-                VerticalAlignment = CanvasVerticalAlignment.Center,
+                HorizontalAlignment = _horizontalTextAlignment,
+                VerticalAlignment = _verticalTextAlignment,
                 Options = CanvasDrawTextOptions.EnableColorFont,
-                WordWrapping = CanvasWordWrapping.NoWrap,
+                WordWrapping = _wordWrapping,
                 Direction = CanvasTextDirection.LeftToRightThenTopToBottom,
                 FontStyle = _fontStyle,
                 FontWeight = _fontWeight,
+                FontFamily = _textFontFamily
             })
+
             using (var textLayout = new CanvasTextLayout(args.DrawingSession,_lyric.Text,textFormat,(float)sender.Size.Width,(float)sender.Size.Height))
             {
                 args.DrawingSession.DrawTextLayout(textLayout,0,0,_lyricColor);

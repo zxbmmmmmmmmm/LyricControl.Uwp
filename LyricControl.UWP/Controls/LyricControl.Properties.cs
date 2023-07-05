@@ -11,6 +11,8 @@ using System.Drawing;
 using Color = Windows.UI.Color;
 using Windows.UI.Text;
 using Windows.UI.Xaml.Media.Animation;
+using Microsoft.Graphics.Canvas.Text;
+using Windows.UI.Xaml.Media;
 
 namespace LyricControl.UWP.Controls
 {
@@ -71,6 +73,82 @@ namespace LyricControl.UWP.Controls
         private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((LyricControl)d)._fontStyle = (FontStyle)e.NewValue;
+        }
+
+        /// <summary>
+        /// 文字水平对齐方式
+        /// </summary>
+        public CanvasHorizontalAlignment HorizontalTextAlignment
+        {
+            get => (CanvasHorizontalAlignment)GetValue(HorizontalTextAlignmentProperty);
+            set => SetValue(HorizontalTextAlignmentProperty, value);
+        }
+
+        public static readonly DependencyProperty HorizontalTextAlignmentProperty =
+            DependencyProperty.Register(nameof(CurrentTime), typeof(CanvasHorizontalAlignment), typeof(LyricControl), new PropertyMetadata(CanvasHorizontalAlignment.Center, OnHorizontalTextAlignmentChanged));
+
+        private CanvasHorizontalAlignment _horizontalTextAlignment = CanvasHorizontalAlignment.Center;
+
+        private static void OnHorizontalTextAlignmentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((LyricControl)d)._horizontalTextAlignment = (CanvasHorizontalAlignment)e.NewValue;
+        }
+
+        /// <summary>
+        /// 文字竖直对齐方式
+        /// </summary>
+        public CanvasVerticalAlignment VerticalTextAlignment
+        {
+            get => (CanvasVerticalAlignment)GetValue(VerticalTextAlignmentProperty);
+            set => SetValue(VerticalTextAlignmentProperty, value);
+        }
+
+        public static readonly DependencyProperty VerticalTextAlignmentProperty =
+            DependencyProperty.Register(nameof(VerticalTextAlignment), typeof(CanvasVerticalAlignment), typeof(LyricControl), new PropertyMetadata(CanvasVerticalAlignment.Center, OnVerticalTextAlignmentChanged));
+
+        private CanvasVerticalAlignment _verticalTextAlignment = CanvasVerticalAlignment.Center;
+
+        private static void OnVerticalTextAlignmentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((LyricControl)d)._verticalTextAlignment = (CanvasVerticalAlignment)e.NewValue;
+        }
+
+        /// <summary>
+        /// 文字换行
+        /// </summary>
+        public CanvasWordWrapping WordWrapping
+        {
+            get => (CanvasWordWrapping)GetValue(WordWrappingProperty);
+            set => SetValue(WordWrappingProperty, value);
+        }
+
+        public static readonly DependencyProperty WordWrappingProperty =
+            DependencyProperty.Register(nameof(WordWrapping), typeof(CanvasWordWrapping), typeof(LyricControl), new PropertyMetadata(CanvasWordWrapping.NoWrap, OnVerticalWordWrappingChanged));
+
+        private CanvasWordWrapping _wordWrapping = CanvasWordWrapping.NoWrap;
+
+        private static void OnVerticalWordWrappingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((LyricControl)d)._wordWrapping = (CanvasWordWrapping)e.NewValue;
+        }
+        
+        /// <summary>
+        /// 字体
+        /// </summary>
+        public new string TextFontFamily
+        {
+            get => (string)GetValue(TextFontFamilyProperty);
+            set => SetValue(TextFontFamilyProperty, value);
+        }
+
+        public new static readonly DependencyProperty TextFontFamilyProperty =
+            DependencyProperty.Register(nameof(TextFontFamily), typeof(string), typeof(LyricControl), new PropertyMetadata(FontFamily.XamlAutoFontFamily.Source, OnTextFontFamilyChanged));
+
+        private string _textFontFamily = FontFamily.XamlAutoFontFamily.Source;
+
+        private static void OnTextFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((LyricControl)d)._textFontFamily = (string)e.NewValue;
         }
 
         /// <summary>
